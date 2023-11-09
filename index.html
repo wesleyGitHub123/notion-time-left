@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <title>Time Left Until January 1, 2024</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Fjalla One', sans-serif;
+            background-color: #fff;
+        }
+        .box {
+            display: inline-block;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #days {
+            background-color: #0f4d4f;
+        }
+        #hours {
+            background-color: #4CAF50;
+        }
+        #minutes {
+            background-color: #76250b;
+        }
+        h2 {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="counter">
+        <h2>
+            Time left until January 1, 2024
+        </h2>
+        <h2 class="box" id="days"></h2>
+        <h2 class="box" id="hours"></h2>
+        <h2 class="box" id="minutes"></h2>
+    </div>
+    <script>
+        function CountDownTimer(date) {
+            const left_days = document.getElementById("days");
+            const left_hours = document.getElementById("hours");
+            const left_minutes = document.getElementById("minutes");
+            const end = new Date(date);
+            const _second = 1000;
+            const _minute = _second * 60;
+            const _hour = _minute * 60;
+            const _day = _hour * 24;
+            function showRemaining() {
+                const now = new Date();
+                const distance = end - now;
+                if (distance <= 0) {
+                    clearInterval(timer);
+                    document.getElementById("counter").innerHTML = "<h2>It's Over!</h2>";
+                    return;
+                }
+                const days = Math.floor(distance / _day);
+                const hours = Math.floor((distance % _day) / _hour);
+                const minutes = Math.floor((distance % _hour) / _minute);
+                left_days.innerHTML = days + " days ";
+                left_hours.innerHTML = hours + " hours ";
+                left_minutes.innerHTML = minutes + " mins ";
+            }
+            const timer = setInterval(showRemaining, 1000);
+            showRemaining();
+        }
+        CountDownTimer("01/01/2024 00:00 AM");
+    </script>
+</body>
+</html>
